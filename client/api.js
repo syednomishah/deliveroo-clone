@@ -13,6 +13,12 @@ export const getFeaturedResturants = ()=>{
     `);
 }
 
+export const getCategories = ()=>{
+    return sanityQuery(`
+        *[_type == 'category']
+    `);
+}
+
 export const getFeaturedResturantById = id=>{
     return sanityQuery(`
         *[_type == 'featured' && _id == $id] {

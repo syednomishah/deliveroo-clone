@@ -1,15 +1,19 @@
 import { View, Text, ScrollView } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ArrowRightIcon } from 'react-native-heroicons/outline'
 import ResturantCard from './resturantCard'
 import { getFeaturedResturantById } from '../api'
 export default function FeatureRow({id, title, description}) {
 
+  const [resturants, setResturants] = useState([]);
+
   useEffect(() => {
     getFeaturedResturantById(id).then(data=>{
       // console.log('got data: ',data);
+      setResturants(data?.resturants);
     })
-  }, [])
+  }, [id])
+  // console.log(resturants);
   
   return (
     <View>
@@ -30,62 +34,26 @@ export default function FeatureRow({id, title, description}) {
         }}
         className="pt-4"
        >
-            <ResturantCard
-                id="1"
-                imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU"
-                title="Yo sushi"
-                rating={4.5}
-                genre="japnese"
-                address="123 main street"
-                description="this is a text description"
-                dishes={[]}
-                lng={20}
-                lat={0}
+        {
+          resturants.map(resturant=>{
+            return (
+                <ResturantCard
+                  key={resturant._id}
+                  id={resturant._id}
+                  imgUrl={resturant.image}
+                  title={resturant.name}
+                  rating={resturant.rating}
+                  genre={resturant.type?.name}
+                  address="123 main street"
+                  description={resturant.description}
+                  dishes={resturant.dishes}
+                  lng={resturant.lng}
+                  lat={resturant.lat}
 
-            />
-            
-            <ResturantCard
-                id="1"
-                imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU"
-                title="Yo sushi"
-                rating={4.5}
-                genre="japnese"
-                address="123 main street"
-                description="this is a text description"
-                dishes={[]}
-                lng={20}
-                lat={0}
-
-            />
-            
-            <ResturantCard
-                id="1"
-                imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU"
-                title="Yo sushi"
-                rating={4.5}
-                genre="japnese"
-                address="123 main street"
-                description="this is a text description"
-                dishes={[]}
-                lng={20}
-                lat={0}
-
-            />
-            
-            <ResturantCard
-                id="1"
-                imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU"
-                title="Yo sushi"
-                rating={4.5}
-                genre="japnese"
-                address="123 main street"
-                description="this is a text description"
-                dishes={[]}
-                lng={20}
-                lat={0}
-
-            />
-            
+              />    
+            )
+          })
+        }           
        </ScrollView>
     
     </View>

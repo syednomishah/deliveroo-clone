@@ -1,8 +1,18 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import CategoryCard from './categoryCard'
+import { getCategories } from '../api'
 
 export default function Categories() {
+
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    getCategories().then(data=>{
+      // console.log('got data', data[0].name);
+      setCategories(data);
+    })
+  }, [])
+  
   return (
     <ScrollView
         // className="p-4"
@@ -14,12 +24,17 @@ export default function Categories() {
         showsHorizontalScrollIndicator={false}
 
     >
-        <CategoryCard imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU" title="cat1" />
-        <CategoryCard imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU" title="cat1" />
-        <CategoryCard imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU" title="cat1" />
-        <CategoryCard imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU" title="cat1" />
-        <CategoryCard imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU" title="cat1" />
-        <CategoryCard imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTP68GaMxj6iSn18pYEVZyW0lLLYgbEzbdmFQ&usqp=CAU" title="cat1" />
+        {
+          categories?.map(category=>{
+            return(
+              <CategoryCard 
+              key={category._id}
+              imgUrl={category.image}
+              title={category.name}
+            />
+            )
+          })
+        }
       
     </ScrollView>
   )
