@@ -69,6 +69,7 @@ export default function HomeScreen() {
                             key={category._id}
                             id={category._id}
                             title={category.name}
+                            resturants={category?.resturants}
                             description={category.description}
                             featuredCategory={category._type}
                         />
