@@ -36,6 +36,7 @@ export default function FeatureRow({id, title, description, resturants}) {
        >
         {
           resturants.map(resturant=>{
+            console.log('resturnat: ',resturant);
             return (
                 <ResturantCard
                   key={resturant._id}

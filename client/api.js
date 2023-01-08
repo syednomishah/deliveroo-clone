@@ -7,6 +7,9 @@ export const getFeaturedResturants = ()=>{
             ...,
             resturants[]->{
             ...,
+            type->{
+                name
+            },
             dishes[]->
             }
         }
