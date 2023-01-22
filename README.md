@@ -7,8 +7,8 @@ Made using react native with expo, with very cool animations and css.
 ## Technologies used in this project
 react native, expo, tailwindcss, sanity studio (headless cms)
 ## Installation
-Setup sanity project and edit project Ids.
-
+Setup sanity project in sanity studio and add projectId in client/sanity.js file and npm install
+cd into server and run 'sanity start' to start the sanity server
 
 
 ## Contributing
