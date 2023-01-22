@@ -82,7 +82,7 @@ export default function BasketScreen() {
                 <Text className="font-extrabold">${basketTotal+deliveryFee}</Text>
             </View>
             <View>
-                <TouchableOpacity className="bg-[#00CCBB] p-3 rounded-lg">
+                <TouchableOpacity onPress={()=> navigation.navigate('PreparingOrder')} className="bg-[#00CCBB] p-3 rounded-lg">
                     <Text className="text-white text-center font-bold text-lg">Place Order</Text>
                 </TouchableOpacity>
             </View>
